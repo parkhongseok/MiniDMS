@@ -14,7 +14,9 @@
     <!-- Controller 스캔 위치 -->
     <context:component-scan base-package="com.phs.minidms.controller" />
 
-    <!-- ViewResolver 설정 -->
+    <!-- ViewResolver 설정
+    컨트롤러가 반환한 "문자열"을 JSP 파일 경로로 변환해주는 것.
+    예시: return "upload"; → /WEB-INF/views/upload.jsp 로 매핑-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />

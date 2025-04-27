@@ -1,6 +1,25 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <!--ContextLoaderListener는 해당 파일의 설정을 참고해서,
+        전역(Application) 범위의 ApplicationContext를 만든다.
+        (Service, Repository 용 but 전역이니까 컨트롤러 등에서도 서비스 등 DI 가능)
+
+        context:component-scan 이 지정된 base-package 하위 클래스들만 스캔해서 웹 요청 관련 Bean으로 분리해서 등록함-->
+    <context:component-scan base-package="com.minidms" />
+
+    <!--   DispatcherServlet과는 무슨 관계?
+        DispatcherServlet은 Controller/View 전용 Web ApplicationContext를 따로 만들지만, Root ApplicationContext를 부모로 삼는다-->
+
+    <!-- JPA Repository 사용 설정 -->
+    <jpa:repositories base-package="com.minidms.repository" />
 
 </beans>

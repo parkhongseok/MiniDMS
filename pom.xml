@@ -51,13 +51,6 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- JDBC Driver (MariaDB 기준) -->
-    <dependency>
-      <groupId>org.mariadb.jdbc</groupId>
-      <artifactId>mariadb-java-client</artifactId>
-      <version>3.1.4</version>
-    </dependency>
-
     <!-- 테스트용 JUnit -->
     <dependency>
       <groupId>junit</groupId>
@@ -65,6 +58,50 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- JDBC Driver (MariaDB 기준) -->
+    <dependency>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>3.1.4</version>
+    </dependency>
+
+    <!-- JPA API -->
+    <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <!-- Spring Data JPA -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>2.7.10</version> <!-- Spring Framework 5.3.33 기준 -->
+    </dependency>
+
+    <!-- Hibernate Core (JPA 구현체) -->
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>6.3.1.Final</version>
+    </dependency>
+
+    <!-- Spring ORM (Spring과 JPA 연결) -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>5.3.33</version>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+      <scope>provided</scope>
+    </dependency>
+
 
   </dependencies>
   <build>
