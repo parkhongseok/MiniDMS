@@ -22,6 +22,17 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <!-- 파일 업로드를 위한 MultipartResolver
+    업로드 관련 용량 제한으로, CVE-2024-47554의 실질적인 리스크를 완전히 차단-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5242880"/> <!-- 5MB -->
+        <property name="maxUploadSizePerFile" value="2097152"/> <!-- 파일당 2MB -->
+        <property name="maxInMemorySize" value="1048576"/> <!-- 메모리 상에 올릴 수 있는 최대 크기 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+
     <!-- 어노테이션 기반 MVC 활성화 -->
     <mvc:annotation-driven />
 </beans>

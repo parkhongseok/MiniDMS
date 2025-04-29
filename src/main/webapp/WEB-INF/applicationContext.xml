@@ -1,12 +1,13 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
          http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <!--ContextLoaderListener는 해당 파일의 설정을 참고해서,
@@ -14,12 +15,57 @@
         (Service, Repository 용 but 전역이니까 컨트롤러 등에서도 서비스 등 DI 가능)
 
         context:component-scan 이 지정된 base-package 하위 클래스들만 스캔해서 웹 요청 관련 Bean으로 분리해서 등록함-->
-    <context:component-scan base-package="com.minidms" />
+    <context:component-scan base-package="com.phs.minidms" />
 
     <!--   DispatcherServlet과는 무슨 관계?
         DispatcherServlet은 Controller/View 전용 Web ApplicationContext를 따로 만들지만, Root ApplicationContext를 부모로 삼는다-->
 
     <!-- JPA Repository 사용 설정 -->
-    <jpa:repositories base-package="com.minidms.repository" />
+    <jpa:repositories base-package="com.phs.minidms.repository" />
 
+    <!-- DataSource 등록 -->
+    <!-- H2 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <!--  URL : jdbc:h2:mem:minidmsdb : 메모리 DB (RAM에만 존재)
+                    DB_CLOSE_DELAY=-1 : 연결이 끊겨도 DB가 메모리에서 살아있게 함
+                    MODE=MySQL : H2를 MySQL 문법처럼 동작하게 함 (MariaDB 호환성 확보)  -->
+        <property name="url" value="jdbc:h2:mem:minidmsdb;DB_CLOSE_DELAY=-1;MODE=MySQL"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <!-- MariaDB -->
+<!--    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">-->
+<!--        <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>-->
+<!--        <property name="url" value="jdbc:mariadb://localhost:3306/네DB이름"/>-->
+<!--        <property name="username" value="네DB사용자명"/>-->
+<!--        <property name="password" value="네DB비밀번호"/>-->
+<!--    </bean>-->
+
+    <!--  EntityManagerFactory 등록 -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.phs.minidms.domain"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="org.hibernate.dialect.MariaDBDialect"/>
+                <property name="showSql" value="true"/>
+                <property name="generateDdl" value="true"/>
+            </bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--  TransactionManager 등록  -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <!--  트랜잭션 어노테이션을 활성화  -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

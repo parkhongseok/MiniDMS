@@ -1,11 +1,12 @@
 package com.phs.minidms.domain;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,12 +25,12 @@ public class DocumentVersion {
     private Document document;
 
     private int versionNumber;
-
+    private String filename; // 저장된 파일명 - UUID로 변환된 실제 저장 파일명
     private String filePath;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uploaded_by")
-    private User uploadedBy;
+    private Member uploadedBy;
 
     private long fileSize;
 

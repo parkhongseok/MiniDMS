@@ -21,7 +21,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>5.3.33</version>
+      <version>5.3.35</version>
     </dependency>
 
     <!-- JSTL -->
@@ -59,19 +59,34 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- JDBC Driver (MariaDB 기준) -->
+    <!-- JDBC Driver -->
+    <!--  MariaDB  -->
     <dependency>
       <groupId>org.mariadb.jdbc</groupId>
       <artifactId>mariadb-java-client</artifactId>
       <version>3.1.4</version>
     </dependency>
-
-    <!-- JPA API -->
+    <!--  H2  -->
     <dependency>
-      <groupId>jakarta.persistence</groupId>
-      <artifactId>jakarta.persistence-api</artifactId>
-      <version>3.1.0</version>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.2.224</version> <!-- 최신 버전 -->
+      <scope>runtime</scope> <!-- 실행 시만 필요 -->
     </dependency>
+
+    <!-- JPA API
+    ※ 최신 Spring Data JPA는 javax.persistence 대신 jakarta.persistence
+      하지만 Hibernate 5.x / Spring 5.x 레거시 환경에서는 javax.persistence도 사용-->
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>javax.persistence-api</artifactId>
+      <version>2.2</version>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>jakarta.persistence</groupId>-->
+<!--      <artifactId>jakarta.persistence-api</artifactId>-->
+<!--      <version>3.1.0</version>-->
+<!--    </dependency>-->
 
     <!-- Spring Data JPA -->
     <dependency>
@@ -82,9 +97,11 @@
 
     <!-- Hibernate Core (JPA 구현체) -->
     <dependency>
-      <groupId>org.hibernate.orm</groupId>
+      <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>6.3.1.Final</version>
+      <version>5.6.15.Final</version>
+      <!-- 5.6 최신 안정 버전, Hibernate-core 6.x에서 다운그레이ㄷ
+      Spring Framework 5.3.x 버전 (spring-orm 포함)은 hibernate5.x까지와 호환 -->
     </dependency>
 
     <!-- Spring ORM (Spring과 JPA 연결) -->
@@ -101,6 +118,34 @@
       <version>1.18.30</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- DBCP2 (DataSource 연결 풀) -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.15.2</version>
+    </dependency>
+
+
+    <!-- 파일 업로드
+    CommonsMultipartResolver는 Spring MVC + JSP 환경에서 파일 업로드 기능을 위한 설정인데,
+    이 resolver는 내부적으로 Apache Commons FileUpload에 의존
+    -->
+<!--  업로드 시 리소스(메모리/디스크 등)를 무제한 소비하게 되어, 의도치 않은 서비스 중단(DOS)이 발생할 수 있음.
+원인: commons-fileupload가 대용량 파일을 받아도 제한이 없으면 OOM(OutOfMemoryError)나 디스크 부족 상황이 생길 수 있음.
+대책: multipartResolver에 업로드 용량 제한 설정 추가-->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.5</version>
+    </dependency>
+
 
 
   </dependencies>

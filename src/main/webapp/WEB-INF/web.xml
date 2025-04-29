@@ -49,6 +49,17 @@
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+<!-- H2 콘솔 서블릿 -->
+  <servlet>
+    <servlet-name>H2Console</servlet-name>
+    <servlet-class>org.h2.server.web.WebServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>H2Console</servlet-name>
+    <url-pattern>/h2-console/*</url-pattern>
+  </servlet-mapping>
+
 
   <!-- POST 요청이나 JSP 출력 시 한글 깨짐 방지를 위한 필터 -->
   <filter>
