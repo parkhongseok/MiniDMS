@@ -1,0 +1,171 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* 중앙 정렬을 위한 wrapper */
+.layout-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* 내용 컨테이너 */
+.main-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+/* 제목 */
+h1, h2 {
+    color: #333333;
+    margin-bottom: 30px;
+}
+
+/* 버튼 */
+button {
+    width: 100%;
+    padding: 16px;
+    font-size: 17px;
+    margin-top: 15px;
+    border: none;
+    background-color: #444;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+button:hover {
+    background-color: #222;
+}
+
+/* 입력 그룹 */
+.label-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+.label-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #555;
+}
+input[type="text"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fafafa;
+}
+
+/* 파일 경로 출력 */
+.filepath {
+    font-family: monospace;
+    color: #333;
+    background-color: #e0e0e0;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+
+.header {
+    width: 100%;
+    background-color: #333;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+.nav a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    background-color: #eee;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
+
+
+
+
+
+.document-card {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s ease;
+}
+
+.document-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.doc-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.doc-meta {
+    font-size: 13px;
+    color: #888;
+}
+
+.doc-description {
+    margin: 12px 0;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+}
+.toggle-details {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.doc-details {
+    text-align: left;
+    margin-top: 12px;
+    padding: 12px;
+    border-left: 4px solid #aaa;
+    font-size: 14px;
+    line-height: 1.5;
+}

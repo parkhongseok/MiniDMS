@@ -10,7 +10,8 @@ import java.util.UUID;
 
 @Component
 public class FileUtil {
-    private final String uploadRoot = "C:/minidms/uploads"; // 🖥️ 서버 내 절대 경로로 변경 가능
+    // Mac/Win 모두 호환 가능하게 설정 TEST 용 URL
+    private final String uploadRoot = System.getProperty("user.home") + "/minidms/uploads";
 
     public File saveFile(MultipartFile multipartFile) throws IOException {
         if (multipartFile.isEmpty()) {
@@ -35,6 +36,7 @@ public class FileUtil {
         File savedFile = new File(dir, uniqueName);
         multipartFile.transferTo(savedFile);
 
+        System.out.println("📁 저장된 파일: " + savedFile.getAbsolutePath());
         return savedFile;
     }
 

@@ -17,10 +17,6 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-
-    private String description;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "current_version_id")
     private DocumentVersion currentVersion;

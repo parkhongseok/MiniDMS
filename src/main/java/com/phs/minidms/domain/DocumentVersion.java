@@ -24,9 +24,12 @@ public class DocumentVersion {
     @JoinColumn(name = "document_id")
     private Document document;
 
-    private int versionNumber;
-    private String filename; // 저장된 파일명 - UUID로 변환된 실제 저장 파일명
+
+    private String originalFilename; // 실제 업로드한 파일 이름
+    private String savedFilename; // 저장된 파일명 - UUID로 변환된 실제 저장 파일명
+    private String description; // 선택적으로 문서 설명
     private String filePath;
+    private int versionNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uploaded_by")

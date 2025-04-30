@@ -19,8 +19,6 @@ public class TestController {
     @ResponseBody
     public String testCreate() {
         Document document = new Document();
-        document.setTitle("Test Document");
-        document.setDescription("This is a test document.");
         document.setCreatedAt(LocalDateTime.now());
         documentRepository.save(document);
         return "Saved!";

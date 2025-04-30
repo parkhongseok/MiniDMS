@@ -60,6 +60,11 @@
     <url-pattern>/h2-console/*</url-pattern>
   </servlet-mapping>
 
+  <!-- css 로딩 이슈 -->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/resources/*</url-pattern>
+  </servlet-mapping>
 
   <!-- POST 요청이나 JSP 출력 시 한글 깨짐 방지를 위한 필터 -->
   <filter>

@@ -1,36 +1,33 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>MiniDMS - Home</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            text-align: center;
-        }
-        h1 {
-            margin-bottom: 40px;
-        }
-        button {
-            padding: 12px 24px;
-            margin: 10px;
-            font-size: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
 </head>
 <body>
-    <h1>Mini Document Management System</h1>
 
-    <form action="/upload" method="get">
-        <button type="submit">문서 업로드</button>
-    </form>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-    <form action="/documents" method="get">
-        <button type="submit">문서 목록</button>
-    </form>
+<div class="layout-wrapper">
+    <div class="main-container">
+        <h1>Mini Document Management System</h1>
 
-    <form action="/test-list" method="get">
-        <button type="submit">테스트 데이터 확인</button>
-    </form>
+        <form action="/upload" method="get">
+            <button type="submit">문서 업로드</button>
+        </form>
+
+        <form action="/documents" method="get">
+            <button type="submit">📁 문서 목록</button>
+        </form>
+
+        <form action="/test-list" method="get">
+            <button type="submit">🧪 테스트 데이터 확인</button>
+        </form>
+    </div>
+</div>
+
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
 </body>
 </html>
